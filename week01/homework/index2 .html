@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>원페이지 쇼핑몰</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+
+    $(document).ready(function(){
+$.ajax({
+  type: "GET", // GET 방식으로 요청한다.
+  url: "https://api.manana.kr/exchange/rate.json",
+  data: {}, // 요청하면서 함께 줄 데이터 (GET 요청시엔 비워두세요)
+  success: function(response){
+    let nowRate =  response[1]['rate'];
+    $('#rate-box').text(nowrate)
+    }
+})
+    });
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+
+        .myitem {
+            width: 500px;
+            height: 300px;
+
+            background-image: url("https://t1.daumcdn.net/cfile/tistory/997E2C395B988B3619");
+            background-position: center;
+            background-size: cover;
+        }
+
+        .price {
+            font-size: 16px;
+        }
+
+        .desc {
+            width: 500px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .order-form {
+            width: 500px;
+        }
+
+        .my-btn {
+            width: 100px;
+            margin: auto;
+            display: block;
+        }
+
+        .wrap {
+            margin: auto;
+            width: 500px;
+        }
+        .rate{
+            color: blue;
+        }
+    </style>
+
+    <script>
+        function order() {
+            let name = $('#order-name').val();
+            let count = $('#order-count').val();
+            let address = $('#order-address').val();
+            let phone = $('#order-phone').val();
+
+            if (name == '') {
+                alert('이름을 입력하세요');
+                return 2
+            } else if (count == '수량을 선택하세요...') {
+                alert('수량을 입력하세요');
+            } else if (address == '') {
+                alert('주소를 입력하세요');
+            } else if (phone == '') {
+                alert('전화번호를 입력하세요');
+            } else {
+                alert('주문이 완료 되었습니다')
+            }
+        }
+    </script>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="myitem"></div>
+    <div class="desc">
+        <h1>양초를 팝니다 <span class="price">가격:3,000원/개</span></h1>
+        <p>이 양초는 특별한 힘을 갖고 있습니다. 양초를 켜두면 힘이 나지요. 성공자의 마인드를 갖게 되는 신비한 양초 입니다.</p>
+
+        <p class="rate"> 달러-원 환율: <span id="rate-box">1,000</span></p>
+    </div>
+
+    <div class="order-form">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">주문자 이름</span>
+            </div>
+            <input id="order-name" type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">수량</label>
+            </div>
+            <select id="order-count" class="custom-select">
+                <option selected>수량을 선택하세요...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">주소</span>
+            </div>
+            <input id="order-address" type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">전화번호</span>
+            </div>
+            <input id="order-phone" type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+        <button onclick="order()" type="button" class="btn btn-primary my-btn">주문하기</button>
+    </div>
+</div>
+</body>
+
+</html>
