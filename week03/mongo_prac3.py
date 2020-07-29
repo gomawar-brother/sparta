@@ -12,3 +12,5 @@ movies = list(db.movies.find({'star': target_star}))
 
 for movie in movies:
     print(movie['title'])
+
+    print('hello git!')
